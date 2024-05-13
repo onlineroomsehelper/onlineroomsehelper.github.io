@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test1</title>
+    <title>个人主页</title>
     <script>
         // 获取北京时间的函数
         function getBeijingTime() {
             var now = new Date();
-            var beijingTime = new Date(now.getTime() + (8 * 60 * 60 * 1000)); // 加8小时
+            var beijingTime = new Date(now.getTime()); 
             return beijingTime;
         }
 
-        // 计算时间戳的函数
+        // 获取时间戳的函数
         function calculateTimestamp() {
             var baseTimestamp = 1713629012; // 基准时间戳
-            var targetDate = new Date("April 20, 2024 16:03:30"); // 目标日期
+            var targetDate = new Date("April 21, 2024 00:03:30 GMT+0800"); // 目标日期
             var currentDate = getBeijingTime(); // 当前北京时间
-            var differenceInSeconds = Math.floor((currentDate - targetDate) / 1000 - 8 * 60 * 60); // 计算时间差（秒）
+            var differenceInSeconds = Math.floor((currentDate.getTime() - targetDate.getTime()) / 1000); // 计算时间差（秒）
             var timestamp = baseTimestamp + differenceInSeconds;
             return timestamp;
         }
@@ -38,7 +38,7 @@
     </script>
 </head>
 <body>
-    <h1>test1</h1>
+    <h1>个人主页</h1>
     <div id="beijing-time">当前北京时间：</div>
     <div id="timestamp">timestamp=</div>
 </body>
