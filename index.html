@@ -1,47 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>onlineroomsehelper</title>
-<script>
-window.onload = function() {
-    // 获取当前北京时间
-    function getBeijingTime() {
-        var now = new Date();
-        var utc_offset = 8; // 北京时间偏移量（UTC+8）
-        var beijingTime = new Date(now.getTime() + (utc_offset * 60 * 60 * 1000));
-        return beijingTime;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页</title>
+    <script>
+        // 获取北京时间的函数
+        function getBeijingTime() {
+            var now = new Date();
+            var beijingTime = new Date(now.getTime() + (8 * 60 * 60 * 1000)); // 加8小时
+            return beijingTime;
+        }
 
-    // 计算时间戳
-    function calculateTimestamp() {
-        var baseTimestamp = 1713629012; // 基准时间
-        var targetDate = new Date("April 21, 2024 00:03:30 GMT+0800"); // 目标日期
-        var currentDate = getBeijingTime(); // 当前北京时间
-        var differenceInSeconds = (currentDate - targetDate) / 1000; // 计算时间差（秒）
-        var timestamp = baseTimestamp + differenceInSeconds;
-        return Math.floor(timestamp); // 取整
-    }
+        // 计算时间戳的函数
+        function calculateTimestamp() {
+            var baseTimestamp = 1713629012; // 基准时间戳
+            var targetDate = new Date("April 21, 2024 00:03:30 GMT+0800"); // 目标日期
+            var currentDate = getBeijingTime(); // 当前北京时间
+            var differenceInSeconds = Math.floor((currentDate - targetDate) / 1000); // 计算时间差（秒）
+            var timestamp = baseTimestamp + differenceInSeconds;
+            return timestamp;
+        }
 
-    // 更新页面内容
-    function updatePageContent() {
-        var beijingTime = getBeijingTime();
-        var timestamp = calculateTimestamp();
-        document.getElementById('beijing-time').innerText = '当前北京时间：' + beijingTime.toLocaleString();
-        document.getElementById('timestamp').innerText = 'timestamp=' + timestamp;
-    }
+        // 更新页面内容的函数
+        function updatePageContent() {
+            var beijingTime = getBeijingTime();
+            var timestamp = calculateTimestamp();
+            document.getElementById('beijing-time').innerText = '当前北京时间：' + beijingTime.toLocaleString();
+            document.getElementById('timestamp').innerText = 'timestamp=' + timestamp;
+        }
 
-    // 每秒更新页面内容
-    setInterval(updatePageContent, 1000);
+        // 每秒更新页面内容
+        setInterval(updatePageContent, 1000);
 
-    // 初始页面内容更新
-    updatePageContent();
-};
-</script>
+        // 页面加载完毕后立即更新一次
+        window.onload = updatePageContent;
+    </script>
 </head>
 <body>
-    <h1>onlineroomsehelper</h1>
+    <h1>个人主页</h1>
     <div id="beijing-time">当前北京时间：</div>
     <div id="timestamp">timestamp=</div>
 </body>
